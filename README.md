@@ -1,6 +1,6 @@
 # Improvements to `<details>` styling
 
-L. David Baron <dbaron@chromium.org>, April 2023
+L. David Baron, <dbaron@chromium.org>, April 2023
 
 ## Goals
 
@@ -71,7 +71,7 @@ Pages can override these styles (except for the internal default summary,
 which in both engines has the same styles duplicated in the shadow DOM;
 Gecko using a linked stylesheet and Chromium using a style attribute).
 
-== Chromium ==
+### Chromium
 
 The `details` element [uses shadow DOM internally](https://source.chromium.org/search?q=%22HTMLDetailsElement::DidAddUserAgentShadowRoot%22&ss=chromium),
 containing a slot for the main summary (with a default summary child),
@@ -79,9 +79,9 @@ and a slot for the remaining content.
 The assignment of the main summary to the slot for the main summary
 uses [custom C++ code](https://source.chromium.org/search?q=%22HTMLDetailsElement::ManuallyAssignSlots%22&ss=chromium) that uses a generic manual slotting mechanism.
 
-TODO: Check how usable ::marker is
+TODO: Check how usable `::marker` is
 
-== Gecko ==
+### Gecko
 
 The [`details` element](https://searchfox.org/mozilla-central/source/dom/html/HTMLDetailsElement.cpp) uses shadow DOM internally,
 containing a style sheet,
@@ -91,7 +91,7 @@ The assignment of the main summary to the slot for the main summary
 uses [custom C++ code](https://searchfox.org/mozilla-central/search?q=ShadowRoot%3A%3AGetSlotNameFor&path=&case=false&regexp=false) that handles details specially,
 and assigns the main summary to the magic `internal-main-summary` slot name.
 
-TODO: Check how usable ::marker is
+TODO: Check how usable `::marker` is
 
 ### WebKit
 
@@ -113,7 +113,7 @@ The assignment of the main summary to the slot for the main summary
 uses custom C++ code that overrides the named slotting mechanism,
 slotting the main summary into a slot named `summarySlot`.
 
-TODO: Check how usable ::-webkit-details-marker is
+TODO: Check how usable `::-webkit-details-marker` is
 
 ## Replacement of disclosure triangle
 
