@@ -4,7 +4,10 @@ L. David Baron, <dbaron@chromium.org>, April 2023
 
 ## Goals
 
-The HTML `details` element represents a disclosure widget.
+The HTML `details` element represents a
+[disclosure](https://open-ui.org/components/disclosure.research) widget.
+It can also be used as a part of an
+[accordion](https://open-ui.org/components/accordion.research) widget.
 However, there are many disclosure widgets on the web
 that do not use the `details` element.
 In many cases, the styling of these disclosure widgets
@@ -13,6 +16,28 @@ is not achievable using the `details` element.
 We should instead be in a situation where stylability
 is not an obstacle to the use of the `details` element
 for the vast majority of disclosure widgets on the Web.
+
+## User needs
+
+Developers regularly use disclosure and accordion widgets on the Web.
+Today, that often means that they build their own widget
+rather than using a widget provided by the platform.
+
+This proposal is suggesting that we add features that would enable
+developers to use the platform's widget in more cases
+(hopefully the vast majority of cases).
+Doing so would help users because
+it would make (or at least would enable making)
+the user experience
+more consistent, and generally better, in a number of areas:
+* keyboard shortcuts and focus handling,
+* exposure via ARIA to assistive technology, and
+* integration with browser features such as find-in-page.
+
+Reducing the need for developers to build their own widgets
+should also reduce the size of pages that use such widgets,
+which reduces the time and bandwidth needed
+for users to load those pages.
 
 ## Current implementation behavior
 
