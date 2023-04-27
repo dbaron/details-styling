@@ -140,20 +140,37 @@ slotting the main summary into a slot named `summarySlot`.
 
 TODO: Check how usable `::-webkit-details-marker` is
 
-## Replacement of disclosure triangle
+## Requirements
 
-### Requirements
+### Replacement of disclosure triangle
 
-### Proposal
+### Layout of parts of disclosure widget
 
-## Layout of parts of disclosure widget
+## Options
 
-### Requirements
+The following are options we have for solving various parts of the
+above requirements.
+Many of them do not address the entire problem,
+so more than one of them is likely to be needed.
 
-### Proposal #1: Pseudo-elements
+### Proposal #1: Hiding and replacing disclosure widget
 
-### Proposal #2: Shadow tree replacement
+Hiding and rebuilding parts of a widget is a common approach
+for solving widget styling issues on the Web.
+It is [doable today](https://www.scottohara.me/blog/2022/09/12/details-summary.html#:~:text=Styling%20a%20disclosure%20widget)
+given the default styles for these elements.
+(Having standard styles across browser engines
+would slightly reduce the complexity of doing this.)
 
-### Proposal #3: Hiding and replacing disclosure widget
+This has the advantage of being a rather well-worn path,
+and also of allowing developers to replace the marker
+with whatever they want.
+It has the disadvantage that
+any keyboard behavior, focus behavior, and ARIA
+associated with the default marker is lost.
 
+### Proposal #2: Pseudo-elements (new ones or `::part()`)
 
+### Proposal #3: Improved `::marker` styling
+
+### Proposal #4: Shadow tree replacement
