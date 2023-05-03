@@ -144,7 +144,20 @@ TODO: Check how usable `::-webkit-details-marker` is
 
 ### Replacement of disclosure triangle
 
+Most disclosure widgets want their own appearance for the open/closed indicator
+which by default is a disclosure triangle.
+It should be possible to customize its appearance based on open/closed state
+and also pseudo-classes like `:hover` and `:active`.
+
 ### Layout of parts of disclosure widget
+
+It should be possible to make arbitrary or nearly-arbitrary layouts
+of the disclosure triangle (or open/closed indicator), the summary,
+and the contents of the collapsable area of the widget.
+For example, it should be possible to position the open/closed indicator
+in different positions relative to the other parts,
+and it should be possible to use these pieces
+as part of a flex or a grid layout.
 
 ## Options
 
@@ -168,9 +181,71 @@ with whatever they want.
 It has the disadvantage that
 any keyboard behavior, focus behavior, and ARIA
 associated with the default marker is lost.
+However, if that behavior is common to the marker and the `summary` element
+then this less of a problem.
 
 ### Proposal #2: Pseudo-elements (new ones or `::part()`)
 
+We could have pseudo-elements to address
+the three pieces of the disclosure widget:
+the summary, the open/closed marker, and the collapsable contents.
+These pseudo-elements could potentially address pieces that have
+a defined relationship with each other in user-agent shadow DOM content.
+
+The pseudo-elements themselves could be newly-defined CSS pseudo-elements.
+However, if this is defined in terms of user-agent shadow DOM,
+we also have the option of exposing `::part()` pseudo-elements
+from the defined user-agent shadow DOM,
+rather than minting new pseudo-elements.
+(This hasn't been done before,
+but does seem like something we could reasonably do.)
+
+The pseudo-element for the open/closed marker should probably be `::marker`,
+given the existing use of that pseudo-element.
+
 ### Proposal #3: Improved `::marker` styling
 
+Currently a
+[limited set](https://drafts.csswg.org/css-lists-3/#marker-properties)
+of properties apply to the `::marker` pseudo-element.
+
+It probably makes sense that many properties like position and float are
+not supported on `::marker`
+(see [test](tests-of-existing-behavior/marker-movement.html)).
+However, in the context of `details`/`summary`,
+it probably makes more sense than it does for lists
+to allow for repositioning of the marker.
+
+(The [CSS2.0 `marker-offset` property](https://www.w3.org/TR/2008/REC-CSS2-20080411/generate.html#markers)
+does not appear to be implemented
+[in Chromium](https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/core/css/css_properties.json5)
+or [in Gecko](https://searchfox.org/mozilla-central/search?q=marker-offset&path=&case=false&regexp=false)
+or [in WebKit](https://github.com/WebKit/WebKit/blob/main/Source/WebCore/css/CSSProperties.json).)
+
+A number of use cases probably could be addressed by supporting
+additional properties on `::marker`, such as:
+* box model properties,
+* a property to say which side the marker goes on (though
+  this would have similar questions regarding AT and focus order
+  as those that exist for
+  flex and grid properties that do visual reordering),
+
 ### Proposal #4: Shadow tree replacement
+
+Given that major browser engine implementations all
+implement `details` using user-agent shadow DOM,
+it seems like one option for improving stylability of `details`
+would be to allow the replacement of the shadow DOM
+so that developers could arrange the relationship of the parts as they need.
+
+This faces the obstacle that of the DOM spec's restrictions
+on replacing the shadow DOM of the details element,
+plus the (new, I think) concept of allowing developers
+to replace a user-agent provided shadow DOM.
+These seem like somewhat major obstacles.
+
+On the positive side, it would do a good job of ensuring that developers
+can style the `details` element as they want.
+But developers who replace the shadow DOM
+would then be responsible for rebuilding the necessary
+key handling, focus behavior, and ARIA integration.
