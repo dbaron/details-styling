@@ -1,6 +1,8 @@
 # Improvements to `<details>` styling
 
-L. David Baron, <dbaron@chromium.org>, April 2023
+L. David Baron, <dbaron@chromium.org>, April-May 2023
+
+Feedback: https://github.com/openui/open-ui/issues/744
 
 ## Goals
 
