@@ -104,7 +104,9 @@ The `details` element [uses shadow DOM internally](https://source.chromium.org/s
 containing a slot for the main summary (with a default summary child),
 and a slot for the remaining content.
 The assignment of the main summary to the slot for the main summary
-uses [custom C++ code](https://source.chromium.org/search?q=%22HTMLDetailsElement::ManuallyAssignSlots%22&ss=chromium) that uses a generic manual slotting mechanism.
+uses [custom C++ code](https://source.chromium.org/search?q=%22HTMLDetailsElement::ManuallyAssignSlots%22&ss=chromium)
+that calls the
+[imperative slotting API](https://html.spec.whatwg.org/multipage/scripting.html#dom-slot-assign).
 
 TODO: Check how usable `::marker` is
 
@@ -137,7 +139,8 @@ The [`details` element](https://github.com/WebKit/WebKit/blob/main/Source/WebCor
 containing a slot for the main summary (with a default summary child),
 and a slot for the remaining content.
 The assignment of the main summary to the slot for the main summary
-uses custom C++ code that overrides the named slotting mechanism,
+uses [custom C++ code](https://github.com/WebKit/WebKit/blob/82faeb56882ce53ee0f979087645c0cbfa5db2bf/Source/WebCore/html/HTMLDetailsElement.cpp#L70)
+that overrides the named slotting mechanism,
 slotting the main summary into a slot named `summarySlot`.
 
 TODO: Check how usable `::-webkit-details-marker` is
