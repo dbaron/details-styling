@@ -164,6 +164,12 @@ in different positions relative to the other parts,
 and it should be possible to use these pieces
 as part of a flex or a grid layout.
 
+### Animation
+
+It should be possible
+to have the opening/closing of the details widget animate,
+and for that animation to be styled with CSS transitions or animations.
+
 ## Options
 
 The following are options we have for solving various parts of the
