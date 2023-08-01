@@ -160,7 +160,7 @@ It should be possible to make arbitrary or nearly-arbitrary layouts
 of the disclosure triangle (or open/closed indicator), the summary,
 and the contents of the collapsable area of the widget.
 For example, it should be possible to position the open/closed indicator
-in different positions relative to the other parts,
+in different positions relative to the other parts (such as on the right side),
 and it should be possible to use these pieces
 as part of a flex or a grid layout.
 
@@ -169,6 +169,9 @@ as part of a flex or a grid layout.
 It should be possible
 to have the opening/closing of the details widget animate,
 and for that animation to be styled with CSS transitions or animations.
+This includes both animation of the height (with appropriate clipping
+and maybe opacity) of the contents of the details, and possibly also
+animation of the marker (e.g., rotation of a marker triangle).
 
 ## Options
 
@@ -199,7 +202,8 @@ then this less of a problem.
 
 We could have pseudo-elements to address
 the three pieces of the disclosure widget:
-the summary, the open/closed marker, and the collapsable contents.
+the summary's container, the open/closed marker,
+and the container for the collapsable contents.
 These pseudo-elements could potentially address pieces that have
 a defined relationship with each other in user-agent shadow DOM content.
 
@@ -209,10 +213,21 @@ we also have the option of exposing `::part()` pseudo-elements
 from the defined user-agent shadow DOM,
 rather than minting new pseudo-elements.
 (This hasn't been done before,
-but does seem like something we could reasonably do.)
+but does seem like something we could reasonably do.
+However, it was rejected in
+[CSS Working Group discussion](https://logs.csswg.org/irc.w3.org/css/2023-07-20/#e1555355)
+and in https://github.com/openui/open-ui/issues/702 .)
 
 The pseudo-element for the open/closed marker should probably be `::marker`,
-given the existing use of that pseudo-element.
+given the existing use of that pseudo-element,
+and that the main summary is currently specified as a `list-item`.
+
+Note that if we take this approach, the rules that
+[are currently specified in HTML as a `style` attribute](https://html.spec.whatwg.org/multipage/rendering.html#the-details-and-summary-elements)
+for the container of the collapsible contents
+should be respecified as UA style sheet rules using this pseudo-element,
+so that is at the UA sheet level of the cascade
+rather than the style attribute level.
 
 ### Proposal #3: Improved `::marker` styling
 
@@ -243,6 +258,10 @@ additional properties on `::marker`, such as:
 
 ### Proposal #4: Shadow tree replacement
 
+[ This option was rejected during
+[CSS Working Group discussion](https://logs.csswg.org/irc.w3.org/css/2023-07-20/#e1555355).
+]
+
 Given that major browser engine implementations all
 implement `details` using user-agent shadow DOM,
 it seems like one option for improving stylability of `details`
@@ -260,3 +279,15 @@ can style the `details` element as they want.
 But developers who replace the shadow DOM
 would then be responsible for rebuilding the necessary
 key handling, focus behavior, and ARIA integration.
+
+### Proposal #5: Support `flex` and `grid` insides on `list-item`s
+
+Currently the
+[specification](https://drafts.csswg.org/css-display-3/#typedef-display-listitem)
+allows only `flow` and `flow-root` as the inner display types for the
+inside of a `list-item`; `flex` and `grid` are not allowed.  This means
+it is not possible to style the inside of a `summary` element as a flex
+or grid layout.
+
+This probably isn't a major problem, but it's worth noting here that we
+could adjust this if it were necessary to do so.
