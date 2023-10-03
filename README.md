@@ -291,3 +291,8 @@ or grid layout.
 
 This probably isn't a major problem, but it's worth noting here that we
 could adjust this if it were necessary to do so.
+
+## See also
+* [Chromium bug 1469418](https://bugs.chromium.org/p/chromium/issues/detail?id=1469418)
+* [Mozilla bug 1856374](https://bugzilla.mozilla.org/show_bug.cgi?id=1856374) (display setting)
+* [CSS Working Group Minutes, 2023-07-20](https://lists.w3.org/Archives/Public/www-style/2023Sep/0019.html)
