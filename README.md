@@ -3,8 +3,7 @@
 L. David Baron, <dbaron@chromium.org>, April-May 2023
 
 * Feedback: https://github.com/openui/open-ui/issues/744
-* CSS standardization issue: https://github.com/w3c/csswg-drafts/issues/9879
-* HTML standardization PR: https://github.com/whatwg/html/pull/10265
+* [Explainer for work happening in phase 1](phase-1.md)
 
 ## Goals
 
