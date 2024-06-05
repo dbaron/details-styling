@@ -133,7 +133,7 @@ details::details-content {
   opacity: 0;
   height: 0;
   overflow-y: hidden; /* clip content when height is animating */
-  transition: content-visibility var(--open-close-duration) allow-discrete step-end,
+  transition: content-visibility var(--open-close-duration) allow-discrete,
               opacity var(--open-close-duration),
               height var(--open-close-duration);
 }
@@ -141,8 +141,5 @@ details::details-content {
 details[open]::details-content {
   opacity: 1;
   height: auto;
-  transition: content-visibility var(--open-close-duration) allow-discrete step-start,
-              opacity var(--open-close-duration),
-              height var(--open-close-duration);
 }
 ```
