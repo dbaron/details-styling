@@ -2,8 +2,8 @@
 
 L. David Baron, <dbaron@chromium.org>, May 2024
 
-* CSS standardization issue: https://github.com/w3c/csswg-drafts/issues/9879
-* HTML standardization PR: https://github.com/whatwg/html/pull/10265
+* CSS standardization issue: [w3c/csswg-drafts#9879](https://github.com/w3c/csswg-drafts/issues/9879)
+* HTML standardization PR: [whatwg/html#10265](https://github.com/whatwg/html/pull/10265)
 
 This explainer describes the initial phase of changes proposed
 to improve styling of the `<details>` and `<summary>` elements.
@@ -97,8 +97,8 @@ This proposes a set of changes that improve the ability of authors to style thes
 * add a `::details-content` pseudo-element to address the second slot so that a container for the "additional information" in the `<details>` element can be styled.
 
 For details, see:
-* CSS standardization issue: https://github.com/w3c/csswg-drafts/issues/9879
-* HTML standardization PR: https://github.com/whatwg/html/pull/10265
+* CSS standardization issue: [w3c/csswg-drafts#9879](https://github.com/w3c/csswg-drafts/issues/9879)
+* HTML standardization PR: [whatwg/html#10265](https://github.com/whatwg/html/pull/10265)
 
 ## Related changes
 
