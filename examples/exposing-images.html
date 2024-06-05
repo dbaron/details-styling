@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<style>
+  :root {
+    background: white;
+    color: black;
+  }
+
+  .accordion {
+    display: grid;
+    gap: 1em;
+    /* auto-flow rows of 5em height, with 2 columns */
+    grid: auto-flow 5em / minmax(5em, max-content) 5em;
+  }
+
+  details {
+    display: contents;
+  }
+
+  details > summary {
+    display: block; /* no marker */
+    grid-column: 1;
+    align-content: center;
+    text-align: center;
+    border: thin solid;
+  }
+
+  details[open] > summary {
+    background: #ddf;
+  }
+
+  details::details-content {
+    grid-column: 2;
+  }
+
+  details > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+</style>
+
+<div class="accordion">
+  <details>
+    <summary>Triangle</summary>
+    <img src="triangle.svg">
+  </details>
+
+  <details>
+    <summary>Circle</summary>
+    <img src="circle.svg">
+  </details>
+
+  <details>
+    <summary>Square</summary>
+    <img src="square.svg">
+  </details>
+</div>

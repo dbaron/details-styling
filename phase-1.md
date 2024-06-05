@@ -112,3 +112,102 @@ although these are not strictly part of this proposal:
 * [The ability to transition to/from auto heights](https://github.com/w3c/csswg-drafts/blob/main/css-values-5/calc-size-explainer.md)
 
 ## Examples
+
+The following [example](examples/opacity-animation.html) code causes the opacity and the height
+of a `<details>` element to animate when it opens and closes.
+
+```css
+:root {
+  /* This is tentative syntax pending resolution of
+   * https://github.com/w3c/csswg-drafts/issues/10294 .
+   * Until this syntax is finalized and implemented, the height: auto
+   * below can be replaced with height: calc-size(auto).  */
+  size-keyword-interpolation: auto;
+}
+
+details {
+  --open-close-duration: 500ms;
+}
+
+details::details-content {
+  opacity: 0;
+  height: 0;
+  overflow-y: hidden; /* clip content when height is animating */
+  transition: content-visibility var(--open-close-duration) allow-discrete step-end,
+              opacity var(--open-close-duration),
+              height var(--open-close-duration);
+}
+
+details[open]::details-content {
+  opacity: 1;
+  height: auto;
+  transition: content-visibility var(--open-close-duration) allow-discrete step-start,
+              opacity var(--open-close-duration),
+              height var(--open-close-duration);
+}
+```
+
+The [following example](examples/exposing-images.html) creates a `<details>` element that doesn't have layout changes
+when opening or closing items,
+but instead exposes the items grid cells that were left for them.
+(This example has rather poor user interface but it does show some of the possibilities.)
+
+```html
+<!DOCTYPE html>
+<style>
+  :root {
+    background: white;
+    color: black;
+  }
+
+  .accordion {
+    display: grid;
+    gap: 1em;
+    /* auto-flow rows of 5em height, with 2 columns */
+    grid: auto-flow 5em / minmax(5em, max-content) 5em;
+  }
+
+  details {
+    display: contents;
+  }
+
+  details > summary {
+    display: block; /* no marker */
+    grid-column: 1;
+    align-content: center;
+    text-align: center;
+    border: thin solid;
+  }
+
+  details[open] > summary {
+    background: #ddf;
+  }
+
+  details::details-content {
+    grid-column: 2;
+  }
+
+  details > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+</style>
+
+<div class="accordion">
+  <details>
+    <summary>Triangle</summary>
+    <img src="triangle.svg">
+  </details>
+
+  <details>
+    <summary>Circle</summary>
+    <img src="circle.svg">
+  </details>
+
+  <details>
+    <summary>Square</summary>
+    <img src="square.svg">
+  </details>
+</div>
+```

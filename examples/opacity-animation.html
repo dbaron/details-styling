@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<style>
+
+body {
+  width: 15em;
+}
+
+details {
+  --open-close-duration: 500ms;
+}
+
+details::details-content {
+  opacity: 0;
+  height: 0;
+  overflow-y: hidden; /* clip content when height is animating */
+  transition: content-visibility var(--open-close-duration) allow-discrete step-end,
+              opacity var(--open-close-duration),
+              height var(--open-close-duration);
+}
+
+details[open]::details-content {
+  opacity: 1;
+  height: calc-size(auto);
+  transition: content-visibility var(--open-close-duration) allow-discrete step-start,
+              opacity var(--open-close-duration),
+              height var(--open-close-duration);
+}
+
+</style>
+<details>
+  <summary>What does this summarize?</summary>
+
+  It turns out it doesn't summarize very much.  This is just a demo.
+  So the contents are quite boring.
+  But there's a decent amount of text here.
+</details>
