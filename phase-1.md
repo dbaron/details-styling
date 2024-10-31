@@ -118,11 +118,7 @@ of a `<details>` element to animate when it opens and closes.
 
 ```css
 :root {
-  /* This is tentative syntax pending resolution of
-   * https://github.com/w3c/csswg-drafts/issues/10294 .
-   * Until this syntax is finalized and implemented, the height: auto
-   * below can be replaced with height: calc-size(auto).  */
-  size-keyword-interpolation: auto;
+  interpolate-size: allow-keywords;
 }
 
 details {
